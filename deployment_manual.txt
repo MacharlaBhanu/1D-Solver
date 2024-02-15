@@ -1,0 +1,30 @@
+Transferring python GUI app into executable:
+- steps below are created for Anaconda python environment
+  (https://www.anaconda.com/distribution/)
+1) Create virtual environment:
+  - this is done so that we have only needed libraries, and unnecessarily
+    do not increase the size of our executable
+  conda create -n my_new_env python=3.7
+2) Activate virtual environment:
+  conda activate my_new_env
+3) Install all necessary dependencies
+  pip install -r requirements.txt
+4) Install pyinstaller
+  pip install pyinstaller
+5) Create an executable from the main python file
+  - those flags are making sure the console will be hidden and only
+    one file will be created, instead of the whole directory
+  pyinstaller -y -F -w  "heat_transfer_gui.py"
+5a) Including the material and data files into the .exe
+  - with the inclusion it is probably better to do it manually with auto-py-to-exe
+  - overcoming the issues with including files with onefile export:
+    - https://stackoverflow.com/questions/7674790/bundling-data-files-with-pyinstaller-onefile/13790741#13790741
+  pyinstaller -y -F -w --add-data "D:/Programování/Diploma-Thesis---Inverse-Heat-Transfer/metals_properties.csv";"." --add-data "D:/Programování/Diploma-Thesis---Inverse-Heat-Transfer/DATA.csv";"."  "D:/Programování/Diploma-Thesis---Inverse-Heat-Transfer/heat_transfer_gui.py"
+
+Others:
+- transforming .ui file to .py file:
+  python -m PyQt5.uic.pyuic -x heat_transfer_gui.ui -o heat_transfer_gui_window.py
+- making a .spec file for the .exe migration:
+  pyi-makespec --onefile heat_transfer_gui.py
+- full GUI with .exe migration options:
+  pip install auto-py-to-exe

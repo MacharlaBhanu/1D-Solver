@@ -1,0 +1,13 @@
+dist
+build
+*trial*
+__pycache__
+*csv
+*.png
+*.exe
+*.lprof
+output
+Performance
+Parameters
+Parameters testing
+.mypy_cache
